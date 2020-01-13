@@ -1,12 +1,21 @@
 var MovieList; //前250电影列表，用于制作首页
 var MovieData; //单个电影数据，用于制作详情页
+var classMovieList;  //通过类别筛选电影列表
 var BASIC_URL = 'http://127.0.0.1:8888';
 window.onload = function () {
   getMovieList();
-  
-  var movieId = '26942674';
+  var movieId = '1292052';
   getMovieData(movieId);
 }
+//通过类别筛选电影列表
+// var classWanted = "动作";
+// classMovieList = filterByClass(classWanted);
+function filterByClass(classWanted) {
+  var movieListSubject = MovieList.subjects;
+  movieListSubject = movieListSubject.filter(ele => ele.genres.indexOf(classWanted) > -1);
+  return movieListSubject;
+}
+//获取排名前250的电影信息
 function getMovieList() {
   options = {
     url: BASIC_URL + '/v2/movie/top250',
@@ -24,6 +33,7 @@ function getMovieList() {
   }
   ajax(options);
 }
+//通过豆瓣id获得相应电影详情
 function getMovieData(movieId) {
   var movieId = movieId;
 
