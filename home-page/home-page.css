@@ -45,6 +45,9 @@ input {
   margin: 50px 10px;
   font-size: 2rem;
 }
+.logo-right {
+  color: #e8d195;
+}
 .nav-search {
   margin: 20px 10px;
 }
