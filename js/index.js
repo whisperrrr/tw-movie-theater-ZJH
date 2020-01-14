@@ -3,7 +3,10 @@ var MovieData; //单个电影数据，用于制作详情页
 var classMovieList;  //通过类别筛选电影列表
 var BASIC_URL = 'http://127.0.0.1:8888';
 window.onload = function () {
-  getMovieList();
+  // getMovieList();
+}
+//渲染详情页
+function renderDetailPage() {
   var movieId = '1292052';
   getMovieData(movieId);
 }
@@ -21,7 +24,7 @@ function getMovieList() {
     url: BASIC_URL + '/v2/movie/top250',
     method: "GET",
     data: {
-      apikey: '0df993c66c0c636e29ecbb5344252a4a'
+      apikey: '0df993c66c0c636e29ecbb5344252a4a&start=0&count=100'
     },
     success: function(data) {
       console.log("get movie list success");

@@ -1,0 +1,10 @@
+#pop-movie-detail {
+  padding: 10px;
+  margin-left: 300px;
+  z-index: 20;
+  display: none;
+}
+#pop-movie-info {
+  width: 100%;
+  height: 200px;
+}
