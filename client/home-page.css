@@ -67,17 +67,16 @@ input {
 }
 
 .movie-info {
-  width: 23%;
-  height: 168px;
+  width: 21%;
+  height: 300px;
   margin: 20px 0;
   background-color: rgba(214, 216, 218, 0.479);
 }
 
 .poster{
-  background-image: url('http://www.mvcat.com/upload/images/2017/p2494950714.jpeg');
   background-size: cover;
   background-position: center;
-  height: 60%;
+  height: 80%;
 }
 
 .brief-info {
