@@ -11,15 +11,22 @@ window.onload = function () {
 // var classWanted = "动作";
 // classMovieList = filterByClass(classWanted);
 function filterByClass(classWanted) {
-  var movieListSubject = MovieList.subjects;
+  let movieListSubject = MovieList.subjects;
   movieListSubject = movieListSubject.filter(ele => ele.genres.indexOf(classWanted) > -1);
+  return movieListSubject;
+}
+
+//通过名字筛选电影
+function filterByTitle(titleWanted) {
+  let movieListSubject = MovieList.subjects;
+  movieListSubject = movieListSubject.filter(ele => ele.title === titleWanted);
   return movieListSubject;
 }
 
 //初始化首页列表
 function initialHomePageMovie(data) {
   let movieShow = document.getElementById("movie-show");
-  movieShow.innerHTML = Array.from(data.subjects).reduce((acc, cur) => {
+  movieShow.innerHTML = Array.from(data).reduce((acc, cur) => {
     return acc += `<div class="movie-info">
                      <div class="poster" style="background-image:url(${cur.images.small})"></div>
                      <div class="brief-info">
@@ -41,7 +48,8 @@ function getMovieList() {
     success: function(data) {
       console.log("get movie list success");
       MovieList = data;
-      initialHomePageMovie(data);
+      initialHomePageMovie(data.subjects);
+      console.log(data)
     },
     error: function(error) {
       console.log("error",error);
@@ -68,4 +76,15 @@ function getMovieData(movieId) {
     }
   }
   ajax(options);
+
+  document.getElementById("nav-classes").addEventListener("click", function(e) {    
+    if(e.target.tagName === "TD") {
+      initialHomePageMovie(filterByClass(e.target.innerHTML))
+      document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML
+    }
+  })
+  document.getElementsByClassName("icon-search")[0].addEventListener("click", function(e) {
+    // console.log(e.target.previousSibling.previousSibling);
+    initialHomePageMovie(filterByTitle(e.target.previousSibling.previousSibling.value))
+  })
 }
