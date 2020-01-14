@@ -3,7 +3,17 @@ var MovieData; //单个电影数据，用于制作详情页
 var classMovieList;  //通过类别筛选电影列表
 var BASIC_URL = 'http://127.0.0.1:8888';
 window.onload = function () {
-  // getMovieList();
+   getMovieList();
+   document.getElementById("nav-classes").addEventListener("click", function(e) {    
+    if(e.target.tagName === "TD") {
+      initialHomePageMovie(filterByClass(e.target.innerHTML))
+      document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML
+    }
+  })
+  document.getElementsByClassName("icon-search")[0].addEventListener("click", function(e) {
+    initialHomePageMovie(filterByTitle(e.target.previousSibling.previousSibling.value));
+    document.getElementById("movie-bar-label").children[0].innerHTML = e.target.previousSibling.previousSibling.value
+  })
 }
 //渲染详情页
 function renderDetailPage() {
@@ -11,8 +21,6 @@ function renderDetailPage() {
   getMovieData(movieId);
 }
 //通过类别筛选电影列表
-// var classWanted = "动作";
-// classMovieList = filterByClass(classWanted);
 function filterByClass(classWanted) {
   let movieListSubject = MovieList.subjects;
   movieListSubject = movieListSubject.filter(ele => ele.genres.indexOf(classWanted) > -1);
@@ -79,15 +87,7 @@ function getMovieData(movieId) {
     }
   }
   ajax(options);
-
-  document.getElementById("nav-classes").addEventListener("click", function(e) {    
-    if(e.target.tagName === "TD") {
-      initialHomePageMovie(filterByClass(e.target.innerHTML))
-      document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML
-    }
-  })
-  document.getElementsByClassName("icon-search")[0].addEventListener("click", function(e) {
-    // console.log(e.target.previousSibling.previousSibling);
-    initialHomePageMovie(filterByTitle(e.target.previousSibling.previousSibling.value))
-  })
 }
+
+
+
