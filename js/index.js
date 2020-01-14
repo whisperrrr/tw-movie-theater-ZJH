@@ -18,6 +18,21 @@ function filterByClass(classWanted) {
   movieListSubject = movieListSubject.filter(ele => ele.genres.indexOf(classWanted) > -1);
   return movieListSubject;
 }
+
+//初始化首页列表
+function initialHomePageMovie(data) {
+  let movieShow = document.getElementById("movie-show");
+  movieShow.innerHTML = Array.from(data.subjects).reduce((acc, cur) => {
+    return acc += `<div class="movie-info">
+                     <div class="poster" style="background-image:url(${cur.images.small})"></div>
+                     <div class="brief-info">
+                       <p class="movie-show-title">${cur.title}</p>
+                       <p class="summary">${cur.genres.join(' ')}</p>
+                     </div>
+                   </div> `
+  }, "")
+}
+
 //获取排名前250的电影信息
 function getMovieList() {
   options = {
@@ -29,6 +44,7 @@ function getMovieList() {
     success: function(data) {
       console.log("get movie list success");
       MovieList = data;
+      initialHomePageMovie(data);
     },
     error: function(error) {
       console.log("error",error);
