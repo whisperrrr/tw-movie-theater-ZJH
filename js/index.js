@@ -4,6 +4,8 @@ var classMovieList;  //通过类别筛选电影列表
 var BASIC_URL = 'http://127.0.0.1:8888';
 window.onload = function () {
    getMovieList();
+   // var movieId = '1292052';
+   // getMovieData(movieId);
    document.getElementById("nav-classes").addEventListener("click", function(e) {    
     if(e.target.tagName === "TD") {
       initialHomePageMovie(filterByClass(e.target.innerHTML))
@@ -21,6 +23,7 @@ function renderDetailPage() {
   var movieId = '1292052';
   getMovieData(movieId);
 }
+
 //通过类别筛选电影列表
 function filterByClass(classWanted) {
   let movieListSubject = MovieList.subjects;
@@ -82,6 +85,7 @@ function getMovieData(movieId) {
     success: function(data) {
       console.log("get movie data success");
       MovieData = data;
+      renderDetailPage(data);
     },
     error: function(error) {
       console.log("error",error);
@@ -89,6 +93,49 @@ function getMovieData(movieId) {
   }
   ajax(options);
 }
-
-
-
+//渲染详情页
+function renderDetailPage(data) {
+  renderDetailPageTitle(data);
+  renderDetailPageInfo(data);
+  renderDetailPageReview(data);
+  renderDetailPageCommits(data);
+}
+//渲染标题
+function renderDetailPageTitle(data) {
+  let title = document.getElementById("pop-movie-title");
+  title.innerHTML = `
+  <h2>${data.title}</h2>
+  <span>${data.original_title}</span>
+  `
+}
+//渲染电影信息
+function renderDetailPageInfo(data) {
+  let info = document.getElementById("pop-movie-info");
+  let poster = info.querySelector(".poster");
+  let movieInfo = document.getElementById("movie-info");
+  let movieInfoData = movieInfo.querySelectorAll("span");
+  let dataArray = [data.title, data.genres,
+                   data.languages, data.pubdates,
+                   data.durations, data.rating.average,
+                   data.directors[0].name, getCastName(data.casts)];
+  poster.innerHTML = `<img src=${data.images.small} alt="poster">`;
+  for (let i = 0; i < movieInfoData.length; i++) {
+    movieInfoData[i].innerHTML = dataArray[i];
+  }
+}
+//获得演员名字
+function getCastName(data) {
+  let casts = [];
+  for (let i = 0; i < data.length; i++) {
+    casts.push(data[i].name);
+  }
+  return casts;
+}
+//渲染剧情介绍
+function renderDetailPageReview(data) {
+  console.log("waiting...");
+}
+//渲染评论
+function renderDetailPageCommits(data) {
+  console.log("waiting...");
+}
