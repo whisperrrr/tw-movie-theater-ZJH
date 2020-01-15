@@ -3,10 +3,10 @@ var MovieData; //单个电影数据，用于制作详情页
 var classMovieList;  //通过类别筛选电影列表
 var BASIC_URL = 'http://127.0.0.1:8888';
 window.onload = function () {
-   getMovieList();
+  getMovieList();
    // var movieId = '1292052';
    // getMovieData(movieId);
-   document.getElementById("nav-classes").addEventListener("click", function(e) {    
+  document.getElementById("nav-classes").addEventListener("click", function(e) {    
     if(e.target.tagName === "TD") {
       initialHomePageMovie(filterByClass(e.target.innerHTML))
       document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML
