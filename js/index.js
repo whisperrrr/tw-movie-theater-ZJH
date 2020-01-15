@@ -12,7 +12,8 @@ window.onload = function () {
   })
   document.getElementsByClassName("icon-search")[0].addEventListener("click", function(e) {
     initialHomePageMovie(filterByTitle(e.target.previousSibling.previousSibling.value));
-    document.getElementById("movie-bar-label").children[0].innerHTML = e.target.previousSibling.previousSibling.value
+    document.getElementById("movie-bar-label").children[0].innerHTML = e.target.previousSibling.previousSibling.value;
+    e.target.previousSibling.previousSibling.value = "";
   })
 }
 //渲染详情页
