@@ -17,7 +17,7 @@ window.onload = function () {
     document.getElementById("movie-bar-label").children[0].innerHTML = e.target.previousSibling.previousSibling.value
   })
 }
-//渲染详情页
+//渲染详情页(获得id，发送请求，请求成功后renderDetailPageInfo(data))
 function renderDetailPage() {
   var movieId = '1292052';
   getMovieData(movieId);
@@ -84,7 +84,7 @@ function getMovieData(movieId) {
     success: function(data) {
       console.log("get movie data success");
       MovieData = data;
-      renderDetailPage(data);
+      renderDetailPageInfo(data);
     },
     error: function(error) {
       console.log("error",error);
@@ -92,8 +92,8 @@ function getMovieData(movieId) {
   }
   ajax(options);
 }
-//渲染详情页
-function renderDetailPage(data) {
+//渲染详情页详细信息
+function renderDetailPageInfo(data) {
   renderDetailPageTitle(data);
   renderDetailPageInfo(data);
   renderDetailPageReview(data);
