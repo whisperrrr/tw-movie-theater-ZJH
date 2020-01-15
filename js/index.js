@@ -3,24 +3,44 @@ var MovieData; //单个电影数据，用于制作详情页
 var classMovieList;  //通过类别筛选电影列表
 var BASIC_URL = 'http://127.0.0.1:8888';
 window.onload = function () {
-  getMovieList();
-  // var movieId = '1292052';
-  // getMovieData(movieId);
+   getMovieList();
+   // var movieId = '1292052';
+   // getMovieData(movieId);
+   document.getElementById("nav-classes").addEventListener("click", function(e) {    
+    if(e.target.tagName === "TD") {
+      initialHomePageMovie(filterByClass(e.target.innerHTML))
+      document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML
+    }
+  })
+  document.getElementsByClassName("icon-search")[0].addEventListener("click", function(e) {
+    initialHomePageMovie(filterByTitle(e.target.previousSibling.previousSibling.value));
+    document.getElementById("movie-bar-label").children[0].innerHTML = e.target.previousSibling.previousSibling.value
+  })
+}
+//渲染详情页
+function renderDetailPage() {
+  var movieId = '1292052';
+  getMovieData(movieId);
 }
 
 //通过类别筛选电影列表
-// var classWanted = "动作";
-// classMovieList = filterByClass(classWanted);
 function filterByClass(classWanted) {
-  var movieListSubject = MovieList.subjects;
+  let movieListSubject = MovieList.subjects;
   movieListSubject = movieListSubject.filter(ele => ele.genres.indexOf(classWanted) > -1);
+  return movieListSubject;
+}
+
+//通过名字筛选电影
+function filterByTitle(titleWanted) {
+  let movieListSubject = MovieList.subjects;
+  movieListSubject = movieListSubject.filter(ele => ele.title === titleWanted);
   return movieListSubject;
 }
 
 //初始化首页列表
 function initialHomePageMovie(data) {
   let movieShow = document.getElementById("movie-show");
-  movieShow.innerHTML = Array.from(data.subjects).reduce((acc, cur) => {
+  movieShow.innerHTML = Array.from(data).reduce((acc, cur) => {
     return acc += `<div class="movie-info">
                      <div class="poster" style="background-image:url(${cur.images.small})"></div>
                      <div class="brief-info">
@@ -42,7 +62,8 @@ function getMovieList() {
     success: function(data) {
       console.log("get movie list success");
       MovieList = data;
-      initialHomePageMovie(data);
+      initialHomePageMovie(data.subjects);
+      console.log(data)
     },
     error: function(error) {
       console.log("error",error);
