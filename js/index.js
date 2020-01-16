@@ -113,6 +113,7 @@ function renderDetailPageInfo(data) {
   renderDetailPageInfos(data);
   renderDetailPageReview(data);
   renderDetailPageCommits(data);
+  renderDetailPageRecommand(data);
 }
 //渲染标题
 function renderDetailPageTitle(data) {
@@ -168,4 +169,26 @@ function renderDetailPageCommits(data) {
                   </div>`
     },'')
   console.log("render commits success...");
+}
+//渲染相似推荐
+function renderDetailPageRecommand(data) {
+  let gen = data.genres[0];
+  initialDetailPageMovie(filterByClass(gen));
+}
+//初始化详情页电影（类似首页）
+function initialDetailPageMovie(data) {
+  let popMovieRecommand = document.getElementById("pop-movie-recommand");
+  if (data.length) {
+    popMovieRecommand.innerHTML = Array.from(data).reduce((acc, cur) => {
+      return acc += `<div class="movie-info movie-id=${cur.id}">
+                      <div class="poster"  movie-id=${cur.id} style="background-image:url(${cur.images.small})"></div>
+                      <div class="brief-info">
+                        <p class="movie-show-title" movie-id=${cur.id}>${cur.title}</p>
+                        <p class="summary">${cur.genres.join(' ')}</p>
+                      </div>
+                    </div> `
+    }, "")
+  } else {
+    popMovieRecommand.innerHTML = `<strong class="no-result">没有搜索到结果</strong>`
+  } 
 }
