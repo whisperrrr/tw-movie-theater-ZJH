@@ -3,8 +3,9 @@ var MovieData; //单个电影数据，用于制作详情页
 var classMovieList;  //通过类别筛选电影列表
 var BASIC_URL = 'http://127.0.0.1:8888';
 window.onload = function () {
+  let movieDetail = document.getElementById("pop-movie-detail");
+  let movieBar = document.getElementById("movie-bar");
   getMovieList();
-  renderDetailPage();
    // var movieId = '1292052';
    // getMovieData(movieId);
   document.getElementById("nav-classes").addEventListener("click", function(e) {    
@@ -16,7 +17,12 @@ window.onload = function () {
   document.getElementsByClassName("icon-search")[0].addEventListener("click", function(e) {
     initialHomePageMovie(filterByTitle(e.target.previousSibling.previousSibling.value));
     document.getElementById("movie-bar-label").children[0].innerHTML = e.target.previousSibling.previousSibling.value;
-    e.target.previousSibling.previousSibling.value = "";
+  })
+  document.getElementById("movie-show").addEventListener("click", function(e) {
+    console.log(e.target.getAttribute("movie-id"));
+    movieDetail.style.display = "block";
+    movieBar.style.display = "none";
+    getMovieData(e.target.getAttribute("movie-id"));
   })
 }
 //渲染详情页(获得id，发送请求，请求成功后renderDetailPageInfo(data))
@@ -35,22 +41,27 @@ function filterByClass(classWanted) {
 //通过名字筛选电影
 function filterByTitle(titleWanted) {
   let movieListSubject = MovieList.subjects;
-  movieListSubject = movieListSubject.filter(ele => ele.title === titleWanted);
+  movieListSubject = movieListSubject.filter(ele => ele.title.indexOf(titleWanted) > -1);
   return movieListSubject;
 }
 
 //初始化首页列表
 function initialHomePageMovie(data) {
   let movieShow = document.getElementById("movie-show");
-  movieShow.innerHTML = Array.from(data).reduce((acc, cur) => {
-    return acc += `<div class="movie-info">
-                     <div class="poster" style="background-image:url(${cur.images.small})"></div>
-                     <div class="brief-info">
-                       <p class="movie-show-title">${cur.title}</p>
-                       <p class="summary">${cur.genres.join(' ')}</p>
-                     </div>
-                   </div> `
-  }, "")
+  if (data.length) {
+    console.log(data.length);
+    movieShow.innerHTML = Array.from(data).reduce((acc, cur) => {
+      return acc += `<div class="movie-info movie-id=${cur.id}">
+                      <div class="poster"  movie-id=${cur.id} style="background-image:url(${cur.images.small})"></div>
+                      <div class="brief-info">
+                        <p class="movie-show-title" movie-id=${cur.id}>${cur.title}</p>
+                        <p class="summary">${cur.genres.join(' ')}</p>
+                      </div>
+                    </div> `
+    }, "")
+  } else {
+    movieShow.innerHTML = `<strong class="no-result">没有搜索到结果</strong>`
+  } 
 }
 
 //获取排名前250的电影信息
