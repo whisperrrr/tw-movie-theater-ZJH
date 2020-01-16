@@ -113,18 +113,24 @@ function renderDetailPageTitle(data) {
 }
 //渲染电影信息
 function renderDetailPageInfos(data) {
-  let info = document.getElementById("pop-movie-info");
-  let poster = info.querySelector(".poster");
   let movieInfo = document.getElementById("movie-info");
   let movieInfoData = movieInfo.querySelectorAll("span");
   let dataArray = [data.title, data.genres,
                    data.languages, data.pubdates,
                    data.durations, data.rating.average,
                    data.directors[0].name, getCastName(data.casts)];
-  poster.innerHTML = `<img src=${data.images.small} alt="poster">`;
   for (let i = 0; i < movieInfoData.length; i++) {
     movieInfoData[i].innerHTML = dataArray[i];
   }
+  renderPoster(data);
+}
+//渲染海报
+function renderPoster(data) {
+  let info = document.getElementById("pop-movie-info");
+  let poster = info.querySelectorAll(".poster");
+  poster[0].innerHTML = `<img src=${data.images.small} alt="poster">`;
+  poster[1].innerHTML = `<img src=${data.casts[0].avatars.small} alt="poster">`;
+  poster[2].innerHTML = `<img src=${data.casts[1].avatars.small} alt="poster">`;
 }
 //获得演员名字
 function getCastName(data) {
