@@ -40,7 +40,7 @@ input {
   height: auto;
   margin-left: 300px;
   max-width: 1236px;
-
+  display: none;
 }
 
 #movie-bar-label {

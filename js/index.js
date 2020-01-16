@@ -3,18 +3,21 @@ var MovieData; //单个电影数据，用于制作详情页
 var classMovieList;  //通过类别筛选电影列表
 var BASIC_URL = 'http://127.0.0.1:8888';
 window.onload = function () {
-    getMovieList();
-    renderDetailPage();
-  // document.getElementById("nav-classes").addEventListener("click", function(e) {    
-  //   if(e.target.tagName === "TD") {
-  //     initialHomePageMovie(filterByClass(e.target.innerHTML))
-  //     document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML
-  //   }
-  // })
-  // document.getElementsByClassName("icon-search")[0].addEventListener("click", function(e) {
-  //   initialHomePageMovie(filterByTitle(e.target.previousSibling.previousSibling.value));
-  //   document.getElementById("movie-bar-label").children[0].innerHTML = e.target.previousSibling.previousSibling.value
-  // })
+  getMovieList();
+  renderDetailPage();
+   // var movieId = '1292052';
+   // getMovieData(movieId);
+  document.getElementById("nav-classes").addEventListener("click", function(e) {    
+    if(e.target.tagName === "TD") {
+      initialHomePageMovie(filterByClass(e.target.innerHTML))
+      document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML
+    }
+  })
+  document.getElementsByClassName("icon-search")[0].addEventListener("click", function(e) {
+    initialHomePageMovie(filterByTitle(e.target.previousSibling.previousSibling.value));
+    document.getElementById("movie-bar-label").children[0].innerHTML = e.target.previousSibling.previousSibling.value;
+    e.target.previousSibling.previousSibling.value = "";
+  })
 }
 //渲染详情页(获得id，发送请求，请求成功后renderDetailPageInfo(data))
 function renderDetailPage() {
@@ -84,6 +87,7 @@ function getMovieData(movieId) {
       console.log("get movie data success");
       MovieData = data;
       renderDetailPageInfo(data);
+      console.log(data)
     },
     error: function(error) {
       console.log("error",error);
