@@ -142,7 +142,10 @@ function getCastName(data) {
 }
 //渲染剧情介绍
 function renderDetailPageReview(data) {
-  console.log("waiting...");
+  let popMovieReview = document.getElementById("pop-movie-review");
+  let popMovieReviewInfo = popMovieReview.querySelector("p");
+  popMovieReviewInfo.innerHTML = data.summary;
+  console.log("render review success...");
 }
 //渲染评论
 function renderDetailPageCommits(data) {
