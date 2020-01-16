@@ -149,5 +149,12 @@ function renderDetailPageReview(data) {
 }
 //渲染评论
 function renderDetailPageCommits(data) {
-  console.log("waiting...");
+  let popMovieCommit = document.getElementById("pop-movie-commits");
+  popMovieCommit.innerHTML = Array.from(data.popular_reviews).reduce((acc,cur)=> {
+    return acc += `<div class="commits">
+                      <strong>${cur.author.name}</strong> <!--data.popular_reviews.author.name-->
+                      <span>${cur.summary}</span>
+                  </div>`
+    },'')
+  console.log("render commits success...");
 }
