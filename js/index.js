@@ -6,7 +6,7 @@ var apikeys= ['0df993c66c0c636e29ecbb5344252a4a','0b2bdeda43b5688921839c8ecb2039
 window.onload = function () {
   let movieDetail = document.getElementById("pop-movie-detail");
   let movieBar = document.getElementById("movie-bar");
-  getMovieList();
+  //getMovieList();
    // var movieId = '1292052';
    // getMovieData(movieId);
   document.getElementById("nav-classes").addEventListener("click", function(e) {    

@@ -141,8 +141,21 @@ table td {
   padding: 5px 20px;
 }
 
+.nav-back {
+  margin-right: -100px;
+}
+
 .nav-back > i {
   font-size: 200px;
   color: #333;
   opacity: 0.3;
+}
+
+.icon-basic {
+  font-size: 10px;
+}
+
+.function-icon > i {
+  font-size: 30px;
+  padding: 0px 5px;
 }
