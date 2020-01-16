@@ -12,7 +12,7 @@ window.onload = function () {
   document.getElementById("nav-classes").addEventListener("click", function(e) {    
     if(e.target.tagName === "TD") {
       initialHomePageMovie(filterByClass(e.target.innerHTML))
-      document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML
+      document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML;
     }
   })
   document.getElementsByClassName("icon-search")[0].addEventListener("click", function(e) {
@@ -26,6 +26,8 @@ window.onload = function () {
     getMovieData(e.target.getAttribute("movie-id"));
   })
   document.getElementsByClassName("nav-logo")[0].addEventListener("click", function(e) {
+    getMovieList();
+    document.getElementById("movie-bar-label").children[0].innerHTML = "经典电影";
     movieDetail.style.display = "none";
     movieBar.style.display = "block";
   })
@@ -75,7 +77,7 @@ function getMovieList() {
     url: BASIC_URL + '/v2/movie/top250',
     method: "GET",
     data: {
-      apikey: apikeys[0] + '&start=0&count=100'
+      apikey: apikeys[0] + '&start=0&count=30'
     },
     success: function(data) {
       console.log("get movie list success");
