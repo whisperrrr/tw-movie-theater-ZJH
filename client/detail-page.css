@@ -2,7 +2,7 @@
   padding: 10px;
   margin-left: 300px;
   z-index: 20;
-  display: none;
+  /* display: none; */
 }
 #pop-movie-info {
   height: 200px;
