@@ -4,6 +4,7 @@ var classMovieList;  //通过类别筛选电影列表
 var BASIC_URL = 'http://127.0.0.1:8888';
 window.onload = function () {
   getMovieList();
+  renderDetailPage();
    // var movieId = '1292052';
    // getMovieData(movieId);
   document.getElementById("nav-classes").addEventListener("click", function(e) {    
@@ -86,6 +87,7 @@ function getMovieData(movieId) {
       console.log("get movie data success");
       MovieData = data;
       renderDetailPageInfo(data);
+      console.log(data)
     },
     error: function(error) {
       console.log("error",error);

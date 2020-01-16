@@ -2,26 +2,48 @@
   padding: 10px;
   margin-left: 300px;
   z-index: 20;
-  display: none;
+  /* display: none; */
 }
+
 #pop-movie-info {
   height: 200px;
   margin: 10px;  
   border: 2px solid;
 }
+
+#pop-movie-title {
+  font-size: 2.2rem;
+}
+
+#movie-info > div {
+  margin: 5px 0;
+}
+
 td img {
   height: 200px;
 }
+
 .poster {
   height: 100%;
 }
+
 .cast-poster {
   opacity: 0.75;
   transform: skew(-8deg);
 }
+
+#pop-movie-review {
+  margin: 20px;
+}
+
+#pop-movie-review > p {
+  line-height: 1.5rem;
+}
+
 #pop-movie-commits {
   margin: 20px 0;
 }
+
 .commits {
   border-left: 1px solid;
   margin: 5px 0px;
