@@ -2,6 +2,7 @@ var MovieList; //前250电影列表，用于制作首页
 var MovieData; //单个电影数据，用于制作详情页
 var classMovieList;  //通过类别筛选电影列表
 var BASIC_URL = 'http://127.0.0.1:8888';
+var apikeys= ['0df993c66c0c636e29ecbb5344252a4a','0b2bdeda43b5688921839c8ecb20399b'];
 window.onload = function () {
   let movieDetail = document.getElementById("pop-movie-detail");
   let movieBar = document.getElementById("movie-bar");
@@ -70,7 +71,7 @@ function getMovieList() {
     url: BASIC_URL + '/v2/movie/top250',
     method: "GET",
     data: {
-      apikey: '0df993c66c0c636e29ecbb5344252a4a&start=0&count=100'
+      apikey: apikeys[0] + '&start=0&count=100'
     },
     success: function(data) {
       console.log("get movie list success");
@@ -92,7 +93,7 @@ function getMovieData(movieId) {
     url: BASIC_URL + '/v2/movie/subject/' + movieId,
     method: "GET",
     data: {
-      apikey: '0df993c66c0c636e29ecbb5344252a4a'
+      apikey: apikeys[0]
     },
     success: function(data) {
       console.log("get movie data success");
@@ -109,7 +110,7 @@ function getMovieData(movieId) {
 //渲染详情页详细信息
 function renderDetailPageInfo(data) {
   renderDetailPageTitle(data);
-  renderDetailPageInfo(data);
+  renderDetailPageInfos(data);
   renderDetailPageReview(data);
   renderDetailPageCommits(data);
 }
@@ -122,19 +123,25 @@ function renderDetailPageTitle(data) {
   `
 }
 //渲染电影信息
-function renderDetailPageInfo(data) {
-  let info = document.getElementById("pop-movie-info");
-  let poster = info.querySelector(".poster");
+function renderDetailPageInfos(data) {
   let movieInfo = document.getElementById("movie-info");
   let movieInfoData = movieInfo.querySelectorAll("span");
   let dataArray = [data.title, data.genres,
                    data.languages, data.pubdates,
                    data.durations, data.rating.average,
                    data.directors[0].name, getCastName(data.casts)];
-  poster.innerHTML = `<img src=${data.images.small} alt="poster">`;
   for (let i = 0; i < movieInfoData.length; i++) {
     movieInfoData[i].innerHTML = dataArray[i];
   }
+  renderPoster(data);
+}
+//渲染海报
+function renderPoster(data) {
+  let info = document.getElementById("pop-movie-info");
+  let poster = info.querySelectorAll(".poster");
+  poster[0].innerHTML = `<img src=${data.images.small} alt="poster">`;
+  poster[1].innerHTML = `<img src=${data.casts[0].avatars.small} alt="poster">`;
+  poster[2].innerHTML = `<img src=${data.casts[1].avatars.small} alt="poster">`;
 }
 //获得演员名字
 function getCastName(data) {
@@ -146,9 +153,19 @@ function getCastName(data) {
 }
 //渲染剧情介绍
 function renderDetailPageReview(data) {
-  console.log("waiting...");
+  let popMovieReview = document.getElementById("pop-movie-review");
+  let popMovieReviewInfo = popMovieReview.querySelector("p");
+  popMovieReviewInfo.innerHTML = data.summary;
+  console.log("render review success...");
 }
 //渲染评论
 function renderDetailPageCommits(data) {
-  console.log("waiting...");
+  let popMovieCommit = document.getElementById("pop-movie-commits");
+  popMovieCommit.innerHTML = Array.from(data.popular_reviews).reduce((acc,cur)=> {
+    return acc += `<div class="commits">
+                      <strong>${cur.author.name}</strong> <!--data.popular_reviews.author.name-->
+                      <span>${cur.summary}</span>
+                  </div>`
+    },'')
+  console.log("render commits success...");
 }
