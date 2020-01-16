@@ -25,6 +25,10 @@ window.onload = function () {
     movieBar.style.display = "none";
     getMovieData(e.target.getAttribute("movie-id"));
   })
+  document.getElementsByClassName("nav-logo")[0].addEventListener("click", function(e) {
+    movieDetail.style.display = "none";
+    movieBar.style.display = "block";
+  })
 }
 //渲染详情页(获得id，发送请求，请求成功后renderDetailPageInfo(data))
 function renderDetailPage() {
