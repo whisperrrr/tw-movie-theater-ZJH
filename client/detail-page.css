@@ -41,7 +41,8 @@ td img {
   line-height: 1.5rem;
 }
 
-#pop-movie-commits {
+.pop-movie-commits, 
+.pop-movie-recommand {
   margin: 20px 20px;
 }
 
@@ -51,6 +52,9 @@ td img {
   padding: 5px;
 }
 
+.section-title {
+  font-size: 1.3rem;
+}
 /* .pop-movie-recommand > p {
   padding: 5px;
   border-bottom: 1px solid;

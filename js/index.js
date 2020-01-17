@@ -13,6 +13,7 @@ window.onload = function () {
       initialHomePageMovie(filterByClass(e.target.innerHTML))
       document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML;
       displayWindow("home");
+      document.documentElement.scrollTop = 0;
     }
   })
   document.getElementsByClassName("icon-search")[0].addEventListener("click", function(e) {
@@ -23,11 +24,13 @@ window.onload = function () {
     console.log(e.target.getAttribute("movie-id"));
     getMovieData(e.target.getAttribute("movie-id"));
     displayWindow("detail");
+    document.documentElement.scrollTop = 0;
   })
   document.getElementById("pop-movie-recommand").addEventListener("click", function(e) {
     console.log(e.target.getAttribute("movie-id"));
     getMovieData(e.target.getAttribute("movie-id"));
     displayWindow("detail");
+    document.documentElement.scrollTop = 0;
   })
   document.getElementsByClassName("nav-logo")[0].addEventListener("click", function(e) {
     initialHomePageMovie(MovieList.subjects)
