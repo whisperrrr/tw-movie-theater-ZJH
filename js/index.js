@@ -27,6 +27,7 @@ window.onload = function () {
     movieDetail.style.display = "block";
     movieBar.style.display = "none";
     getMovieData(e.target.getAttribute("movie-id"));
+    document.documentElement.scrollTop = 0;
   })
   document.getElementsByClassName("nav-logo")[0].addEventListener("click", function(e) {
     initialHomePageMovie(MovieList.subjects)
