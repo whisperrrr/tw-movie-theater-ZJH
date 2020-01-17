@@ -25,17 +25,14 @@ window.onload = function () {
     document.getElementById("movie-bar-label").children[0].innerHTML = e.target.previousSibling.previousSibling.value;
   })
   document.getElementById("movie-show").addEventListener("click", function(e) {
-    console.log(e.target.getAttribute("movie-id"));
     movieDetail.style.display = "block";
     movieBar.style.display = "none";
     getMovieData(e.target.getAttribute("movie-id"));
     document.documentElement.scrollTop = 0;
   })
   document.getElementById("pop-movie-recommand").addEventListener("click", function(e) {
-    console.log(e.target.getAttribute("movie-id"));
-    movieDetail.style.display = "block";
-    movieBar.style.display = "none";
     getMovieData(e.target.getAttribute("movie-id"));
+    document.documentElement.scrollTop = 0;
   })
   document.getElementsByClassName("nav-logo")[0].addEventListener("click", function(e) {
     initialHomePageMovie(MovieList.subjects)
