@@ -18,6 +18,7 @@ window.onload = function () {
       document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML;
       movieDetail.style.display = "none";
       movieBar.style.display = "block";
+      document.documentElement.scrollTop = 0;
     }
   })
   document.getElementsByClassName("icon-search")[0].addEventListener("click", function(e) {
