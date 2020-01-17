@@ -11,6 +11,8 @@ window.onload = function () {
    // getMovieData(movieId);
   document.getElementById("nav-classes").addEventListener("click", function(e) {    
     if(e.target.tagName === "TD") {
+      Array.from(document.getElementsByClassName("unactive")).map(e => e.className = "unactive");
+      e.target.className = "unactive active";
       initialHomePageMovie(filterByClass(e.target.innerHTML))
       document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML;
     }
@@ -26,7 +28,7 @@ window.onload = function () {
     getMovieData(e.target.getAttribute("movie-id"));
   })
   document.getElementsByClassName("nav-logo")[0].addEventListener("click", function(e) {
-    getMovieList();
+    initialHomePageMovie(MovieList.subjects)
     document.getElementById("movie-bar-label").children[0].innerHTML = "经典电影";
     movieDetail.style.display = "none";
     movieBar.style.display = "block";
@@ -77,7 +79,7 @@ function getMovieList() {
     url: BASIC_URL + '/v2/movie/top250',
     method: "GET",
     data: {
-      apikey: apikeys[0] + '&start=0&count=30'
+      apikey: apikeys[0] + '&start=0&count=100'
     },
     success: function(data) {
       console.log("get movie list success");
@@ -179,7 +181,7 @@ function renderDetailPageCommits(data) {
   let popMovieCommit = document.getElementById("pop-movie-commits");
   popMovieCommit.innerHTML = Array.from(data.popular_reviews).reduce((acc,cur)=> {
     return acc += `<div class="commits">
-                      <strong>${cur.author.name}</strong> <!--data.popular_reviews.author.name-->
+                      <strong>${cur.author.name}:</strong> <!--data.popular_reviews.author.name-->
                       <span>${cur.summary}</span>
                   </div>`
     },'')
@@ -187,7 +189,7 @@ function renderDetailPageCommits(data) {
 }
 //渲染相似推荐
 function renderDetailPageRecommand(data) {
-  let gen = data.genres[0];
+  let gen = data.genres[1] || data.genres[0];
   initialDetailPageMovie(filterByClass(gen));
 }
 //初始化详情页电影（类似首页）
