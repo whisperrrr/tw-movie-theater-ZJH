@@ -4,6 +4,7 @@ let classMovieList;  //通过类别筛选电影列表
 let movieListId; //所有电影的id编号集合
 let BASIC_URL = 'http://127.0.0.1:8888';
 let apikeys= ['0df993c66c0c636e29ecbb5344252a4a','0b2bdeda43b5688921839c8ecb20399b'];
+
 window.onload = function () {
   getMovieList();
   document.getElementById("nav-classes").addEventListener("click", function(e) {    
@@ -41,6 +42,7 @@ window.onload = function () {
     displayWindow("home");
   })
 }
+
 //显示首页or详情页
 function displayWindow(win) {
   let movieDetail = document.getElementById("pop-movie-detail");
@@ -115,6 +117,7 @@ function getMovieList() {
   }
   ajax(options);
 }
+
 //获取所有电影ID
 function getMovieListId(data) {
   let idList = [];
@@ -123,6 +126,7 @@ function getMovieListId(data) {
   });
   return idList;
 }
+
 //通过豆瓣id获得相应电影详情
 function getMovieData(movieId) {
   options = {
@@ -143,6 +147,7 @@ function getMovieData(movieId) {
   }
   ajax(options);
 }
+
 //渲染详情页详细信息
 function renderDetailPageInfo(data) {
   renderDetailPageTitle(data);
@@ -151,6 +156,7 @@ function renderDetailPageInfo(data) {
   renderDetailPageCommits(data);
   renderDetailPageRecommand(data);
 }
+
 //渲染标题
 function renderDetailPageTitle(data) {
   let title = document.getElementById("pop-movie-title");
@@ -159,6 +165,7 @@ function renderDetailPageTitle(data) {
   <span>${data.original_title}</span>
   `
 }
+
 //渲染电影信息
 function renderDetailPageInfos(data) {
   let movieInfo = document.getElementById("movie-info");
@@ -172,6 +179,7 @@ function renderDetailPageInfos(data) {
   }
   renderPoster(data);
 }
+
 //渲染海报
 function renderPoster(data) {
   let info = document.getElementById("pop-movie-info");
@@ -180,6 +188,7 @@ function renderPoster(data) {
   poster[1].innerHTML = `<img src=${data.casts[0].avatars.small} alt="poster">`;
   poster[2].innerHTML = `<img src=${data.casts[1].avatars.small} alt="poster">`;
 }
+
 //获得演员名字
 function getCastName(data) {
   let casts = [];
@@ -188,6 +197,7 @@ function getCastName(data) {
   }
   return casts;
 }
+
 //渲染剧情介绍
 function renderDetailPageReview(data) {
   let popMovieReview = document.getElementById("pop-movie-review");
@@ -195,6 +205,7 @@ function renderDetailPageReview(data) {
   popMovieReviewInfo.innerHTML = data.summary;
   console.log("render review success...");
 }
+
 //渲染评论
 function renderDetailPageCommits(data) {
   let popMovieCommit = document.getElementById("pop-movie-commits");
@@ -206,11 +217,13 @@ function renderDetailPageCommits(data) {
     },'')
   console.log("render commits success...");
 }
+
 //渲染相似推荐
 function renderDetailPageRecommand(data) {
   let gen = data.genres[1] || data.genres[0];
   initialDetailPageMovie(filterByClass(gen));
 }
+
 //初始化详情页电影（类似首页）
 function initialDetailPageMovie(data) {
   let popMovieRecommand = document.getElementById("pop-movie-recommand");
@@ -228,6 +241,7 @@ function initialDetailPageMovie(data) {
     popMovieRecommand.innerHTML = `<strong class="no-result">没有搜索到结果</strong>`
   } 
 }
+
 //改变主题背景
 function changeLight() {
   let navBar = document.getElementById("nav-bar");
@@ -241,6 +255,7 @@ function changeLight() {
   
 }
 
+//随机展示电影
 function chooseRandom() {
   let idLength = movieListId.length;
   let randomNum = Math.floor(Math.random() * idLength);
