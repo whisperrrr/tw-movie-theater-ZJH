@@ -198,3 +198,11 @@ function initialDetailPageMovie(data) {
     popMovieRecommand.innerHTML = `<strong class="no-result">没有搜索到结果</strong>`
   } 
 }
+//改变主题背景
+function changeLight() {
+  let navBar = document.getElementById("nav-bar");
+  let container = document.getElementsByClassName("container")[0];
+  let backColorNow = navBar.style.backgroundColor === "rgb(73, 49, 49)"? "#f5f5f5":"#493131";
+  navBar.style.backgroundColor = backColorNow;
+  container.style.backgroundColor = backColorNow;
+}
