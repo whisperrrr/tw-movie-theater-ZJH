@@ -19,12 +19,15 @@ window.onload = function () {
   document.getElementsByClassName("icon-search")[0].addEventListener("click", function(e) {
     initialHomePageMovie(filterByTitle(e.target.previousSibling.previousSibling.value));
     document.getElementById("movie-bar-label").children[0].innerHTML = e.target.previousSibling.previousSibling.value;
+    displayWindow("home");
   })
   document.getElementById("movie-show").addEventListener("click", function(e) {
-    console.log(e.target.getAttribute("movie-id"));
-    getMovieData(e.target.getAttribute("movie-id"));
-    displayWindow("detail");
-    document.documentElement.scrollTop = 0;
+    let id = e.target.getAttribute("movie-id")
+    if (id) {
+      getMovieData(id);
+      displayWindow("detail");
+      document.documentElement.scrollTop = 0;
+    }
   })
   document.getElementById("pop-movie-recommand").addEventListener("click", function(e) {
     console.log(e.target.getAttribute("movie-id"));
