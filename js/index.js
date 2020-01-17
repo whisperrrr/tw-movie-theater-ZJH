@@ -5,19 +5,14 @@ let movieListId; //所有电影的id编号集合
 let BASIC_URL = 'http://127.0.0.1:8888';
 let apikeys= ['0df993c66c0c636e29ecbb5344252a4a','0b2bdeda43b5688921839c8ecb20399b'];
 window.onload = function () {
-  let movieDetail = document.getElementById("pop-movie-detail");
-  let movieBar = document.getElementById("movie-bar");
   getMovieList();
-   // var movieId = '1292052';
-   // getMovieData(movieId);
   document.getElementById("nav-classes").addEventListener("click", function(e) {    
     if(e.target.tagName === "TD") {
       Array.from(document.getElementsByClassName("unactive")).map(e => e.className = "unactive");
       e.target.className = "unactive active";
       initialHomePageMovie(filterByClass(e.target.innerHTML))
       document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML;
-      movieDetail.style.display = "none";
-      movieBar.style.display = "block";
+      displayWindow("home");
     }
   })
   document.getElementsByClassName("icon-search")[0].addEventListener("click", function(e) {
@@ -26,22 +21,33 @@ window.onload = function () {
   })
   document.getElementById("movie-show").addEventListener("click", function(e) {
     console.log(e.target.getAttribute("movie-id"));
-    movieDetail.style.display = "block";
-    movieBar.style.display = "none";
     getMovieData(e.target.getAttribute("movie-id"));
+    displayWindow("detail");
   })
   document.getElementById("pop-movie-recommand").addEventListener("click", function(e) {
     console.log(e.target.getAttribute("movie-id"));
-    movieDetail.style.display = "block";
-    movieBar.style.display = "none";
     getMovieData(e.target.getAttribute("movie-id"));
+    displayWindow("detail");
   })
   document.getElementsByClassName("nav-logo")[0].addEventListener("click", function(e) {
     initialHomePageMovie(MovieList.subjects)
     document.getElementById("movie-bar-label").children[0].innerHTML = "经典电影";
-    movieDetail.style.display = "none";
-    movieBar.style.display = "block";
+    displayWindow("home");
   })
+}
+//显示首页or详情页
+function displayWindow(win) {
+  let movieDetail = document.getElementById("pop-movie-detail");
+  let movieBar = document.getElementById("movie-bar");
+  switch(win) {
+    case 'home': 
+      movieDetail.style.display = "none";
+      movieBar.style.display = "block";
+      break;
+    case 'detail':
+      movieDetail.style.display = "block";
+      movieBar.style.display = "none";
+  }
 }
 //渲染详情页(获得id，发送请求，请求成功后renderDetailPageInfo(data))
 // function renderDetailPage() {
