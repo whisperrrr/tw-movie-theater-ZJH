@@ -16,6 +16,8 @@ window.onload = function () {
       e.target.className = "unactive active";
       initialHomePageMovie(filterByClass(e.target.innerHTML))
       document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML;
+      movieDetail.style.display = "none";
+      movieBar.style.display = "block";
     }
   })
   document.getElementsByClassName("icon-search")[0].addEventListener("click", function(e) {
