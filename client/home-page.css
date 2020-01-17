@@ -133,6 +133,11 @@ input {
   margin: 0 auto;
 }
 
+#nav-classes .active {
+  background-color: rgb(117, 117, 117);
+  color: #fff;
+}
+
 #nav-classes td {
   cursor: pointer;
 }
