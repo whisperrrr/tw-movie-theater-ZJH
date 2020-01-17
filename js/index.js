@@ -7,40 +7,11 @@ let apikeys= ['0df993c66c0c636e29ecbb5344252a4a','0b2bdeda43b5688921839c8ecb2039
 
 window.onload = function () {
   getMovieList();
-  document.getElementById("nav-classes").addEventListener("click", function(e) {    
-    if(e.target.tagName === "TD") {
-      Array.from(document.getElementsByClassName("unactive")).map(e => e.className = "unactive");
-      e.target.className = "unactive active";
-      initialHomePageMovie(filterByClass(e.target.innerHTML))
-      document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML;
-      displayWindow("home");
-      document.documentElement.scrollTop = 0;
-    }
-  })
-  document.getElementsByClassName("icon-search")[0].addEventListener("click", function(e) {
-    initialHomePageMovie(filterByTitle(e.target.previousSibling.previousSibling.value));
-    document.getElementById("movie-bar-label").children[0].innerHTML = e.target.previousSibling.previousSibling.value;
-    displayWindow("home");
-  })
-  document.getElementById("movie-show").addEventListener("click", function(e) {
-    let id = e.target.getAttribute("movie-id")
-    if (id) {
-      getMovieData(id);
-      displayWindow("detail");
-      document.documentElement.scrollTop = 0;
-    }
-  })
-  document.getElementById("pop-movie-recommand").addEventListener("click", function(e) {
-    console.log(e.target.getAttribute("movie-id"));
-    getMovieData(e.target.getAttribute("movie-id"));
-    displayWindow("detail");
-    document.documentElement.scrollTop = 0;
-  })
-  document.getElementsByClassName("nav-logo")[0].addEventListener("click", function(e) {
-    initialHomePageMovie(MovieList.subjects)
-    document.getElementById("movie-bar-label").children[0].innerHTML = "经典电影";
-    displayWindow("home");
-  })
+  document.getElementById("nav-classes").addEventListener("click", clickFilterByClass);
+  document.getElementsByClassName("icon-search")[0].addEventListener("click", searchFilterByTitle);
+  document.getElementById("movie-show").addEventListener("click", movieToDetail);
+  document.getElementById("pop-movie-recommand").addEventListener("click", recommendToDetail);
+  document.getElementsByClassName("nav-logo")[0].addEventListener("click", logoToHomePage);
 }
 
 //显示首页or详情页
@@ -70,6 +41,18 @@ function filterByClass(classWanted) {
   return movieListSubject;
 }
 
+//点击类别筛选电影
+function clickFilterByClass(e) {    
+  if(e.target.tagName === "TD") {
+    Array.from(document.getElementsByClassName("unactive")).map(e => e.className = "unactive");
+    e.target.className = "unactive active";
+    initialHomePageMovie(filterByClass(e.target.innerHTML))
+    document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML;
+    displayWindow("home");
+    document.documentElement.scrollTop = 0;
+  }
+}
+
 //通过名字筛选电影
 function filterByTitle(titleWanted) {
   let movieListSubject = MovieList.subjects;
@@ -77,6 +60,37 @@ function filterByTitle(titleWanted) {
   return movieListSubject;
 }
 
+//点击搜索筛选电影
+function searchFilterByTitle(e) {
+  initialHomePageMovie(filterByTitle(e.target.previousSibling.previousSibling.value));
+  document.getElementById("movie-bar-label").children[0].innerHTML = e.target.previousSibling.previousSibling.value;
+  displayWindow("home");
+}
+
+//点击首页电影跳转到详情页
+function movieToDetail(e) {
+  let id = e.target.getAttribute("movie-id")
+  if (id) {
+    getMovieData(id);
+    displayWindow("detail");
+    document.documentElement.scrollTop = 0;
+  }
+}
+
+//点击首页标志跳转到首页
+function logoToHomePage(e) {
+  initialHomePageMovie(MovieList.subjects)
+  document.getElementById("movie-bar-label").children[0].innerHTML = "经典电影";
+  displayWindow("home");
+}
+
+//点击推荐电影跳转到详情页
+function recommendToDetail(e) {
+  console.log(e.target.getAttribute("movie-id"));
+  getMovieData(e.target.getAttribute("movie-id"));
+  displayWindow("detail");
+  document.documentElement.scrollTop = 0;
+}
 //初始化首页列表
 function initialHomePageMovie(data) {
   let movieShow = document.getElementById("movie-show");
