@@ -74,6 +74,7 @@ function movieToDetail(e) {
 
 //点击首页标志跳转到首页
 function logoToHomePage(e) {
+  Array.from(document.getElementsByClassName("unactive")).map(e => e.className = "unactive");
   initialHomePageMovie(MovieList.subjects)
   document.getElementById("movie-bar-label").children[0].innerHTML = "经典电影";
   displayWindow("home");
