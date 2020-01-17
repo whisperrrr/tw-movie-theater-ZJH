@@ -182,8 +182,8 @@ function renderPoster(data) {
   let info = document.getElementById("pop-movie-info");
   let poster = info.querySelectorAll(".poster");
   poster[0].innerHTML = `<img src=${data.images.small} alt="poster">`;
-  poster[1].innerHTML = `<img src=${data.casts[0].avatars.small} alt="poster">`;
-  poster[2].innerHTML = `<img src=${data.casts[1].avatars.small} alt="poster">`;
+  poster[1].innerHTML = `<img src=${data.casts[0].avatars.small} alt="poster" title=${data.casts[0].name}>`;
+  poster[2].innerHTML = `<img src=${data.casts[1].avatars.small} alt="poster" title=${data.casts[1].name}>`;
 }
 
 //获得演员名字
