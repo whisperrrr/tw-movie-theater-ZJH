@@ -1,6 +1,7 @@
 var MovieList; //前250电影列表，用于制作首页
 var MovieData; //单个电影数据，用于制作详情页
 var classMovieList;  //通过类别筛选电影列表
+var movieListId; //所有电影的id编号集合
 var BASIC_URL = 'http://127.0.0.1:8888';
 var apikeys= ['0df993c66c0c636e29ecbb5344252a4a','0b2bdeda43b5688921839c8ecb20399b'];
 window.onload = function () {
@@ -221,4 +222,14 @@ function changeLight() {
   navBar.style.backgroundColor = backColorNow;
   movieBar.style.backgroundColor = backColorNow;
   detailBar.style.backgroundColor = backColorNow;
+}
+
+function chooseRandom() {
+  let idLength = movieListId.length;
+  let randomNum = Math.floor(Math.random() * idLength);
+  let movieDetail = document.getElementById("pop-movie-detail");
+  let movieBar = document.getElementById("movie-bar");
+  getMovieData(movieListId[randomNum]);
+  movieDetail.style.display = "block";
+  movieBar.style.display = "none";
 }
