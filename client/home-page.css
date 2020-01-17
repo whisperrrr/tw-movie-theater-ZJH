@@ -159,4 +159,5 @@ table td {
 .function-icon > i {
   font-size: 30px;
   padding: 0px 5px;
+  cursor: pointer;
 }
