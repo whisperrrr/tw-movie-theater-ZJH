@@ -1,9 +1,9 @@
-var MovieList; //前250电影列表，用于制作首页
-var MovieData; //单个电影数据，用于制作详情页
-var classMovieList;  //通过类别筛选电影列表
-var movieListId; //所有电影的id编号集合
-var BASIC_URL = 'http://127.0.0.1:8888';
-var apikeys= ['0df993c66c0c636e29ecbb5344252a4a','0b2bdeda43b5688921839c8ecb20399b'];
+let MovieList; //前250电影列表，用于制作首页
+let MovieData; //单个电影数据，用于制作详情页
+let classMovieList;  //通过类别筛选电影列表
+let movieListId; //所有电影的id编号集合
+let BASIC_URL = 'http://127.0.0.1:8888';
+let apikeys= ['0df993c66c0c636e29ecbb5344252a4a','0b2bdeda43b5688921839c8ecb20399b'];
 window.onload = function () {
   let movieDetail = document.getElementById("pop-movie-detail");
   let movieBar = document.getElementById("movie-bar");
@@ -36,10 +36,10 @@ window.onload = function () {
   })
 }
 //渲染详情页(获得id，发送请求，请求成功后renderDetailPageInfo(data))
-function renderDetailPage() {
-  var movieId = '1292052';
-  getMovieData(movieId);
-}
+// function renderDetailPage() {
+//   let movieId = '1292052';
+//   getMovieData(movieId);
+// }
 
 //通过类别筛选电影列表
 function filterByClass(classWanted) {
@@ -105,8 +105,6 @@ function getMovieListId(data) {
 }
 //通过豆瓣id获得相应电影详情
 function getMovieData(movieId) {
-  var movieId = movieId;
-
   options = {
     url: BASIC_URL + '/v2/movie/subject/' + movieId,
     method: "GET",
