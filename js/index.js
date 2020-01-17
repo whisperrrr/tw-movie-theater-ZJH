@@ -16,6 +16,8 @@ window.onload = function () {
       e.target.className = "unactive active";
       initialHomePageMovie(filterByClass(e.target.innerHTML))
       document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML;
+      movieDetail.style.display = "none";
+      movieBar.style.display = "block";
     }
   })
   document.getElementsByClassName("icon-search")[0].addEventListener("click", function(e) {
@@ -211,16 +213,15 @@ function initialDetailPageMovie(data) {
 }
 //改变主题背景
 function changeLight() {
-  let container = document.querySelector("body");
   let navBar = document.getElementById("nav-bar");
-  let movieBar = document.getElementById("movie-bar");
-  let detailBar = document.getElementById("pop-movie-detail");
+  let navSearch = document.getElementById("navsearch");
   let backColorNow = navBar.style.backgroundColor === "rgb(73, 49, 49)"? "#f5f5f5":"#493131";
-  container.style.backgroundImage = "none";
-  container.style.backgroundColor = backColorNow;
+  let colorNow = navBar.style.backgroundColor === "rgb(73, 49, 49)"? "#000000":"#e8d195";
+  navSearch.style.backgroundColor = backColorNow;
+  navSearch.style.borderBottomColor = colorNow;
   navBar.style.backgroundColor = backColorNow;
-  movieBar.style.backgroundColor = backColorNow;
-  detailBar.style.backgroundColor = backColorNow;
+  navBar.style.color = colorNow;
+  
 }
 
 function chooseRandom() {
