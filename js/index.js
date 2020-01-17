@@ -30,6 +30,12 @@ window.onload = function () {
     movieBar.style.display = "none";
     getMovieData(e.target.getAttribute("movie-id"));
   })
+  document.getElementById("pop-movie-recommand").addEventListener("click", function(e) {
+    console.log(e.target.getAttribute("movie-id"));
+    movieDetail.style.display = "block";
+    movieBar.style.display = "none";
+    getMovieData(e.target.getAttribute("movie-id"));
+  })
   document.getElementsByClassName("nav-logo")[0].addEventListener("click", function(e) {
     initialHomePageMovie(MovieList.subjects)
     document.getElementById("movie-bar-label").children[0].innerHTML = "经典电影";

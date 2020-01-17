@@ -146,10 +146,6 @@ table td {
   padding: 5px 20px;
 }
 
-.nav-back {
-  margin-right: -100px;
-}
-
 .nav-back > i {
   font-size: 200px;
   color: #333;
