@@ -28,11 +28,6 @@ function displayWindow(win) {
       movieBar.style.display = "none";
   }
 }
-//渲染详情页(获得id，发送请求，请求成功后renderDetailPageInfo(data))
-// function renderDetailPage() {
-//   let movieId = '1292052';
-//   getMovieData(movieId);
-// }
 
 //通过类别筛选电影列表
 function filterByClass(classWanted) {
@@ -79,6 +74,7 @@ function movieToDetail(e) {
 
 //点击首页标志跳转到首页
 function logoToHomePage(e) {
+  Array.from(document.getElementsByClassName("unactive")).map(e => e.className = "unactive");
   initialHomePageMovie(MovieList.subjects)
   document.getElementById("movie-bar-label").children[0].innerHTML = "经典电影";
   displayWindow("home");
@@ -86,17 +82,16 @@ function logoToHomePage(e) {
 
 //点击推荐电影跳转到详情页
 function recommendToDetail(e) {
-  console.log(e.target.getAttribute("movie-id"));
   getMovieData(e.target.getAttribute("movie-id"));
   displayWindow("detail");
   document.documentElement.scrollTop = 0;
 }
+
 //初始化首页列表
 function initialHomePageMovie(data) {
   let movieShow = document.getElementById("movie-show");
   if (data.length) {
-    console.log(data.length);
-    movieShow.innerHTML = Array.from(data).reduce((acc, cur) => {
+      movieShow.innerHTML = Array.from(data).reduce((acc, cur) => {
       return acc += `<div class="movie-info movie-id=${cur.id}">
                       <div class="poster"  movie-id=${cur.id} style="background-image:url(${cur.images.small})"></div>
                       <div class="brief-info">
@@ -123,7 +118,6 @@ function getMovieList() {
       MovieList = data;
       movieListId = getMovieListId(data.subjects);
       initialHomePageMovie(data.subjects);
-      console.log(data)
     },
     error: function(error) {
       console.log("error",error);
@@ -153,7 +147,6 @@ function getMovieData(movieId) {
       console.log("get movie data success");
       MovieData = data;
       renderDetailPageInfo(data);
-      console.log(data)
     },
     error: function(error) {
       console.log("error",error);

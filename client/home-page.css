@@ -40,7 +40,6 @@ input {
   height: auto;
   margin-left: 300px;
   max-width: 1236px;
-  /* display: none; */
 }
 
 #movie-bar-label {
@@ -110,16 +109,16 @@ input {
 .logo-right {
   color: #e8d195;
 
-  animation-name: breath;                 /* 动画名称 */
-  animation-duration: 3s;                 /* 动画时长3秒 */
-  animation-timing-function: ease-in-out; /* 动画速度曲线：以低速开始和结束 */
-  animation-iteration-count: infinite;    /* 播放次数：无限 */
+  animation-name: breath;                 
+  animation-duration: 3s;                 
+  animation-timing-function: ease-in-out; 
+  animation-iteration-count: infinite;    
 }
 
 @keyframes breath {
-  from { opacity: 0.2; }                          /* 动画开始时的不透明度 */
-  50%  { opacity:   1; }                          /* 动画50% 时的不透明度 */
-  to   { opacity: 0.2; }                          /* 动画结束时的不透明度 */
+  from { opacity: 0.2; }                         
+  50%  { opacity:   1; }                        
+  to   { opacity: 0.2; }                     
 }
 
 .nav-search {
