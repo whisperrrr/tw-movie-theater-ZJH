@@ -9,6 +9,7 @@ const proxyServer = http.createServer((request, response) => {
   response.setHeader('Access-Control-Allow-Methods', '*');
   response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   response.setHeader('Content-Type', 'text/plain;charset=utf-8');
+  response.setHeader('Cache-Control', 'max-age=300');
 
   if (parsedUrl.pathname.indexOf(DOUBAN_MOVIE) > -1) {
     http.get(`http://api.douban.com${parsedUrl.pathname}?${parsedUrl.query}`, res => {

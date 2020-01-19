@@ -4,10 +4,9 @@ let classMovieList;  //通过类别筛选电影列表
 let movieListId; //所有电影的id编号集合
 let BASIC_URL = 'http://127.0.0.1:8888';
 let apikeys= ['0df993c66c0c636e29ecbb5344252a4a','0b2bdeda43b5688921839c8ecb20399b'];
-
-  let param = window.location.href.split("?")[1];
-  let id = param.split("=")[1];
-  getMovieData(id);
+let param = window.location.href.split("?")[1];
+let id = param.split("=")[1];
+getMovieData(id);
   //通过豆瓣id获得相应电影详情
 function getMovieData(movieId) {
   options = {
@@ -20,7 +19,6 @@ function getMovieData(movieId) {
       console.log("get movie data success");
       MovieData = data;
       renderDetailPageInfo(data);
-      console.log(data);
     },
     error: function(error) {
       console.log("error",error);
@@ -100,18 +98,18 @@ function renderDetailPageCommits(data) {
   console.log("render commits success...");
 }
 
-// //渲染相似推荐
-// function renderDetailPageRecommand(data) {
-//   let gen = data.genres[1] || data.genres[0];
-//   initialDetailPageMovie(filterByClass(gen));
-// }
+//渲染相似推荐
+function renderDetailPageRecommand(data) {
+  let gen = data.genres[1] || data.genres[0];
+  initialDetailPageMovie(filterByClass(gen));
+}
 
-// //通过类别筛选电影列表
-// function filterByClass(classWanted) {
-//   let movieListSubject = MovieList.subjects;
-//   movieListSubject = movieListSubject.filter(ele => ele.genres.indexOf(classWanted) > -1);
-//   return movieListSubject;
-// }
+//通过类别筛选电影列表
+function filterByClass(classWanted) {
+  let movieListSubject = JSON.parse(localStorage.data).subjects;
+  movieListSubject = movieListSubject.filter(ele => ele.genres.indexOf(classWanted) > -1);
+  return movieListSubject;
+}
 
 //初始化详情页电影（类似首页）
 function initialDetailPageMovie(data) {
