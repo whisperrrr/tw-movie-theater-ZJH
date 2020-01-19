@@ -92,13 +92,15 @@ function initialHomePageMovie(data) {
   let movieShow = document.getElementById("movie-show");
   if (data.length) {
       movieShow.innerHTML = Array.from(data).reduce((acc, cur) => {
-      return acc += `<div class="movie-info movie-id=${cur.id}">
-                      <div class="poster"  movie-id=${cur.id} style="background-image:url(${cur.images.small})"></div>
-                      <div class="brief-info">
-                        <p class="movie-show-title" movie-id=${cur.id}>${cur.title}</p>
-                        <p class="summary">${cur.genres.join(' ')}</p>
-                      </div>
-                    </div> `
+      return acc += `<a target="_blank" href="./detail-page.html?id=${cur.id}">
+                        <div class="movie-info movie-id=${cur.id}">
+                          <div class="poster"  movie-id=${cur.id} style="background-image:url(${cur.images.small})"></div>
+                          <div class="brief-info">
+                            <p class="movie-show-title" movie-id=${cur.id}>${cur.title}</p>
+                            <p class="summary">${cur.genres.join(' ')}</p>
+                          </div>
+                        </div>
+                      </a> `
     }, "")
   } else {
     movieShow.innerHTML = `<strong class="no-result">没有搜索到结果</strong>`
@@ -157,6 +159,7 @@ function getMovieData(movieId) {
 
 //渲染详情页详细信息
 function renderDetailPageInfo(data) {
+  console.log("renderDetailPageInfo")
   renderDetailPageTitle(data);
   renderDetailPageInfos(data);
   renderDetailPageReview(data);
@@ -236,13 +239,15 @@ function initialDetailPageMovie(data) {
   let popMovieRecommand = document.getElementById("pop-movie-recommand");
   if (data.length) {
     popMovieRecommand.innerHTML = Array.from(data).reduce((acc, cur) => {
-      return acc += `<div class="movie-info movie-id=${cur.id}">
-                      <div class="poster"  movie-id=${cur.id} style="background-image:url(${cur.images.small})"></div>
-                      <div class="brief-info">
-                        <p class="movie-show-title" movie-id=${cur.id}>${cur.title}</p>
-                        <p class="summary">${cur.genres.join(' ')}</p>
+      return acc += `<a target="_blank" href="./detail-page.html?id=${cur.id}>
+                      <div class="movie-info movie-id=${cur.id}">
+                        <div class="poster"  movie-id=${cur.id} style="background-image:url(${cur.images.small})"></div>
+                        <div class="brief-info">
+                          <p class="movie-show-title" movie-id=${cur.id}>${cur.title}</p>
+                          <p class="summary">${cur.genres.join(' ')}</p>
+                        </div>
                       </div>
-                    </div> `
+                     </a> `
     }, "")
   } else {
     popMovieRecommand.innerHTML = `<strong class="no-result">没有搜索到结果</strong>`
