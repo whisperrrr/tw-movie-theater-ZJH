@@ -116,8 +116,8 @@ function initialDetailPageMovie(data) {
   let popMovieRecommand = document.getElementById("pop-movie-recommand");
   if (data.length) {
     popMovieRecommand.innerHTML = Array.from(data).reduce((acc, cur) => {
-      return acc += `<a target="_blank" href="./detail-page.html?id=${cur.id}>
-                      <div class="movie-info movie-id=${cur.id}">
+      return acc += `<a target="_blank" href="./detail-page.html?id=${cur.id}">
+                      <div class="movie-info" movie-id=${cur.id}">
                         <div class="poster"  movie-id=${cur.id} style="background-image:url(${cur.images.small})"></div>
                         <div class="brief-info">
                           <p class="movie-show-title" movie-id=${cur.id}>${cur.title}</p>
