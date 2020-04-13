@@ -27,7 +27,7 @@ window.ajax = function (options) {
     }
   }
   //3.调用open()建立连接
-  xhr.open(options.method,options.url  + "?apikey=" + options.data.apikey,true);
+  xhr.open(options.method,options.url,true);
   //4.发送数据
   if (options.method === "POST" || options.method === "PUT") {
     xhr.setRequestHeader("Content-type","application/json");

@@ -3,7 +3,8 @@ let MovieData; //单个电影数据，用于制作详情页
 let classMovieList;  //通过类别筛选电影列表
 let movieListId; //所有电影的id编号集合
 let storage = window.localStorage;
-let BASIC_URL = 'http://127.0.0.1:8888';
+//let BASIC_URL = 'http://127.0.0.1:8888';
+let BASIC_URL = 'http://localhost:8080';
 let apikeys= ['0df993c66c0c636e29ecbb5344252a4a','0b2bdeda43b5688921839c8ecb20399b'];
 
 window.onload = function () {
@@ -93,10 +94,10 @@ function initialHomePageMovie(data) {
 //获取排名前250的电影信息
 function getMovieList() {
   options = {
-    url: BASIC_URL + '/v2/movie/top250',
+    url: BASIC_URL + '/movies',
+    //url: BASIC_URL + '/v2/movie/top250',
     method: "GET",
     data: {
-      apikey: apikeys[0] + '&start=0&count=100'
     },
     success: function(data) {
       console.log("get movie list success");
