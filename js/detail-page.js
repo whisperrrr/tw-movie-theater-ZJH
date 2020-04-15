@@ -7,6 +7,7 @@ let apikeys= ['0df993c66c0c636e29ecbb5344252a4a','0b2bdeda43b5688921839c8ecb2039
 let param = window.location.href.split("?")[1];
 let id = param.split("=")[1];
 getMovieData(id);
+
   //通过豆瓣id获得相应电影详情
 function getMovieData(movieId) {
   options = {
