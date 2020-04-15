@@ -60,18 +60,6 @@ function searchFilterByTitle(e) {
   displayWindow("home");
 }
 
-//点击首页电影跳转到详情页
-function movieToDetail(e) {
-  let id = e.target.getAttribute("movie-id")
-  if (id) {
-    getActorData(id);
-    getCommentData(id);
-    getMovieData(id);
-    displayWindow("detail");
-    document.documentElement.scrollTop = 0;
-  }
-}
-
 //初始化首页列表
 function initialHomePageMovie(data) {
   let movieShow = document.getElementById("movie-show");
@@ -119,6 +107,7 @@ function getMovieListId(data) {
   data.forEach(element => {
     idList.push(element.id);
   });
+  storage.movieId = idList;
   return idList;
 }
 
@@ -158,9 +147,5 @@ function changeLight() {
 function chooseRandom() {
   let idLength = movieListId.length;
   let randomNum = Math.floor(Math.random() * idLength);
-  let movieDetail = document.getElementById("pop-movie-detail");
-  let movieBar = document.getElementById("movie-bar");
-  getMovieData(movieListId[randomNum]);
-  movieDetail.style.display = "block";
-  movieBar.style.display = "none";
+  window.location.href = "http://127.0.0.1:5501/client/detail-page.html?id=" + movieListId[randomNum];
 }

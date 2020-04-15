@@ -4,14 +4,17 @@ let CommentData; //单个电影的评论数据
 let ActorData;  //单个电影的演员数据 
 let classMovieList;  //通过类别筛选电影列表
 let movieListId; //所有电影的id编号集合
+let storage = window.localStorage;
 //let BASIC_URL = 'http://127.0.0.1:8888';
 let BASIC_URL = 'http://localhost:8080';
 let apikeys= ['0df993c66c0c636e29ecbb5344252a4a','0b2bdeda43b5688921839c8ecb20399b'];
 let param = window.location.href.split("?")[1];
 let id = param.split("=")[1];
+
 getActorData(id);
 getCommentData(id);
 getMovieData(id);
+
 
   //通过豆瓣id获得相应电影详情
 function getMovieData(movieId) {
@@ -169,4 +172,12 @@ function initialDetailPageMovie(data) {
   } else {
     popMovieRecommand.innerHTML = `<strong class="no-result">没有搜索到结果</strong>`
   } 
+}
+
+//随机展示电影
+function chooseRandom() {
+  let movieListId = storage.movieId.split(",");
+  let idLength = movieListId.length;
+  let randomNum = Math.floor(Math.random() * idLength);
+  window.location.href = "http://127.0.0.1:5501/client/detail-page.html?id=" + movieListId[randomNum];
 }
