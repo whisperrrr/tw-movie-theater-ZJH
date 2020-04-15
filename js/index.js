@@ -14,21 +14,6 @@ window.onload = function () {
   document.getElementsByClassName("icon-search")[0].addEventListener("click", searchFilterByTitle);
 }
 
-//显示首页or详情页
-function displayWindow(win) {
-  let movieDetail = document.getElementById("pop-movie-detail");
-  let movieBar = document.getElementById("movie-bar");
-  switch(win) {
-    case 'home': 
-      movieDetail.style.display = "none";
-      movieBar.style.display = "block";
-      break;
-    case 'detail':
-      movieDetail.style.display = "block";
-      movieBar.style.display = "none";
-  }
-}
-
 //通过类别筛选电影列表
 function filterByClass(classWanted) {
   movieListSubject = MovieList.filter(ele => ele.type.indexOf(classWanted) > -1);
@@ -48,8 +33,8 @@ function clickFilterByClass(e) {
 
 //通过名字筛选电影
 function filterByTitle(titleWanted) {
-  let movieListSubject = MovieList.subjects;
-  movieListSubject = movieListSubject.filter(ele => ele.title.indexOf(titleWanted) > -1);
+  let movieListSubject = MovieList;
+  movieListSubject = movieListSubject.filter(ele => ele.name.indexOf(titleWanted) > -1);
   return movieListSubject;
 }
 
@@ -57,7 +42,6 @@ function filterByTitle(titleWanted) {
 function searchFilterByTitle(e) {
   initialHomePageMovie(filterByTitle(e.target.previousSibling.previousSibling.value));
   document.getElementById("movie-bar-label").children[0].innerHTML = e.target.previousSibling.previousSibling.value;
-  displayWindow("home");
 }
 
 //初始化首页列表
