@@ -90,7 +90,7 @@ function renderDetailPageInfos(data) {
   let movieInfo = document.getElementById("movie-info");
   let movieInfoData = movieInfo.querySelectorAll("span");
     let dataArray = [MovieData.name, MovieData.type,
-                   MovieData.languages, MovieData.year,
+                   MovieData.language, MovieData.year,
                    MovieData.durations, MovieData.rating,
                    MovieData.director, getCastName(ActorData)];
   for (let i = 0; i < movieInfoData.length; i++) {
