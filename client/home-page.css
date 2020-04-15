@@ -105,6 +105,8 @@ input {
   font-size: 1.2rem;
   line-height: 2rem;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .brief-info .summary {
