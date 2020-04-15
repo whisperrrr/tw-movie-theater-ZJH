@@ -25,8 +25,13 @@ window.onload = function () {
 
 //通过名字筛选电影
 function filterByTitle(titleWanted) {
+  // let movieListSubject = MovieList;
+  // movieListSubject = movieListSubject.filter(ele => ele.name.indexOf(titleWanted) > -1);
+  // return movieListSubject;
   let movieListSubject = MovieList;
-  movieListSubject = movieListSubject.filter(ele => ele.name.indexOf(titleWanted) > -1);
+  movieListSubject = movieListSubject.filter(
+    ele => ele.name.indexOf(titleWanted) > -1 
+            || makePy(ele.name).join("").indexOf(titleWanted.toUpperCase()) > -1);
   return movieListSubject;
 }
 
@@ -59,6 +64,7 @@ function getMovieList() {
   ajax(options);
 }
 
+
 // //初始化详情页电影（类似首页）
 // function initialDetailPageMovie(data) {
 //   let popMovieRecommand = document.getElementById("pop-movie-recommand");
@@ -78,6 +84,17 @@ function getMovieList() {
 //     popMovieRecommand.innerHTML = `<strong class="no-result">没有搜索到结果</strong>`
 //   } 
 // }
+
+//获取所有电影ID
+// function getMovieListId(data) {
+//   let idList = [];
+//   data.forEach(element => {
+//     idList.push(element.id);
+//   });
+//   storage.movieId = idList;
+//   return idList;
+// }
+
 
 //改变主题背景
 // function changeLight() {
