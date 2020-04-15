@@ -27,11 +27,12 @@ window.ajax = function (options) {
     }
   }
   //3.调用open()建立连接
-  xhr.open(options.method,options.url,true);
+  //xhr.open(options.method,options.url,true);
+  xhr.open(options.method,options.url,options.data.isAsync);
   //4.发送数据
   if (options.method === "POST" || options.method === "PUT") {
     xhr.setRequestHeader("Content-type","application/json");
     xhr.send(JSON.stringify(options.data));
   }
-  xhr.send(options.data);
+  xhr.send();
 }

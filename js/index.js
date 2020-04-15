@@ -86,6 +86,7 @@ function getMovieList() {
     url: BASIC_URL + '/movies',
     method: "GET",
     data: {
+      isAsync:true
     },
     success: function(data) {
       console.log("get movie list success");
