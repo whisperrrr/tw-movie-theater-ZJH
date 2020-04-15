@@ -100,10 +100,47 @@ function initialHomePageMovie(data) {
 function changeLight() {
   let navBar = document.getElementById("nav-bar");
   let navSearch = document.getElementById("navsearch");
+  let movieBar = document.getElementById("movie-bar");
+  let logo = document.getElementsByClassName("logo-left")[0];
+  let movieShow = document.getElementsByClassName("movie-show-title");
+  let movieBarLable = document.getElementById("movie-bar-label");
+  let movieIcon = document.getElementsByClassName("icon-dianying");
+  let movieBarColor = movieBar.style.backgroundColor === "rgb(73, 49, 49)"? "transparent":"#493131";
   let backColorNow = navBar.style.backgroundColor === "rgb(73, 49, 49)"? "#f5f5f5":"#493131";
   let colorNow = navBar.style.backgroundColor === "rgb(73, 49, 49)"? "#000000":"#e8d195";
+
   navSearch.style.backgroundColor = backColorNow;
   navSearch.style.borderBottomColor = colorNow;
   navBar.style.backgroundColor = backColorNow;
   navBar.style.color = colorNow;
+  movieBar.style.background = movieBarColor;
+  logo.style.color = colorNow;
+  movieBarLable.style.color = colorNow;
+  movieIcon[0].style.color = colorNow;
+
+  changeMovieShowColor(movieShow,colorNow);
+}
+
+function changeMovieShowColor(movieShow,colorNow) {
+  for (let i = 0; i< movieShow.length; i++) {
+    movieShow[i].style.color = colorNow;
+  }
+}
+
+//通过名字筛选电影
+function filterByTitle(titleWanted) {
+  // let movieListSubject = MovieList;
+  // movieListSubject = movieListSubject.filter(ele => ele.name.indexOf(titleWanted) > -1);
+  // return movieListSubject;
+  let movieListSubject = MovieList;
+  movieListSubject = movieListSubject.filter(
+    ele => ele.name.indexOf(titleWanted) > -1 
+            || makePy(ele.name).join("").indexOf(titleWanted.toUpperCase()) > -1);
+  return movieListSubject;
+}
+
+//点击搜索筛选电影
+function searchFilterByTitle(e) {
+  initialHomePageMovie(filterByTitle(e.target.previousSibling.previousSibling.value));
+  document.getElementById("movie-bar-label").children[0].innerHTML = e.target.previousSibling.previousSibling.value;
 }

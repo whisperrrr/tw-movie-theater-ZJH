@@ -22,26 +22,6 @@ window.onload = function () {
   document.getElementsByClassName("icon-search")[0].addEventListener("click", searchFilterByTitle);
 }
 
-
-//通过名字筛选电影
-function filterByTitle(titleWanted) {
-  // let movieListSubject = MovieList;
-  // movieListSubject = movieListSubject.filter(ele => ele.name.indexOf(titleWanted) > -1);
-  // return movieListSubject;
-  let movieListSubject = MovieList;
-  movieListSubject = movieListSubject.filter(
-    ele => ele.name.indexOf(titleWanted) > -1 
-            || makePy(ele.name).join("").indexOf(titleWanted.toUpperCase()) > -1);
-  return movieListSubject;
-}
-
-//点击搜索筛选电影
-function searchFilterByTitle(e) {
-  initialHomePageMovie(filterByTitle(e.target.previousSibling.previousSibling.value));
-  document.getElementById("movie-bar-label").children[0].innerHTML = e.target.previousSibling.previousSibling.value;
-}
-
-
 //获取排名前250的电影信息
 function getMovieList() {
   options = {
