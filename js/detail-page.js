@@ -152,39 +152,3 @@ function renderDetailPageRecommand(data) {
   initialDetailPageMovie(filterByClass(gen));
 }
 
-//通过类别筛选电影列表
-function filterByClass(classWanted) {
-  let movieListSubject = JSON.parse(localStorage.data);
-  movieListSubject = movieListSubject.filter(ele => ele.type.indexOf(classWanted) > -1);
-  return movieListSubject;
-}
-
-//初始化详情页电影（类似首页）
-// function initialDetailPageMovie(data) {
-//   let popMovieRecommand = document.getElementById("pop-movie-recommand");
-//   if (data.length) {
-//     popMovieRecommand.innerHTML = Array.from(data).reduce((acc, cur) => {
-//         return acc += `<a target="_blank" href="./detail-page.html?id=${cur.id}">
-//         <div class="movie-info movie-id=${cur.id}">
-//           <div class="poster"  movie-id=${cur.id} style="background-image:url(${cur.smallImg})"></div>
-//           <div class="brief-info">
-//             <p class="movie-show-title" movie-id=${cur.id}>${cur.name}</p>
-//             <p class="summary">${cur.type}</p>
-//           </div>
-//         </div>
-//       </a> `
-//     }, "")
-//   } else {
-//     popMovieRecommand.innerHTML = `<strong class="no-result">没有搜索到结果</strong>`
-//   } 
-// }
-
-//随机展示电影
-// function chooseRandom() {
-//   let movieListId = storage.movieId.split(",");
-//   let idLength = movieListId.length;
-//   let randomNum = Math.floor(Math.random() * idLength);
-//   window.location.href = "http://127.0.0.1:5501/client/detail-page.html?id=" + movieListId[randomNum];
-// }
-
-

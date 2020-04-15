@@ -24,12 +24,12 @@ function getMovieListId(data) {
   return idList;
 }
 
-//通过名字筛选电影
 function filterByTitle(titleWanted) {
-  let movieListSubject = JSON.parse(localStorage.data);
-  movieListSubject = movieListSubject.filter(ele => ele.name.indexOf(titleWanted) > -1);
-  return movieListSubject;
-}
+  let movieListSubject =JSON.parse(localStorage.data);
+  movieListSubject = movieListSubject.filter(
+    ele => ele.name.indexOf(titleWanted) > -1 
+            || makePy(ele.name).join("").indexOf(titleWanted.toUpperCase()) > -1);
+  return movieListSubject;		}
 
 //点击搜索筛选电影
 function searchFilterByTitle(e) {
