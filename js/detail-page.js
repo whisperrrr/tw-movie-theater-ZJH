@@ -11,10 +11,12 @@ let apikeys= ['0df993c66c0c636e29ecbb5344252a4a','0b2bdeda43b5688921839c8ecb2039
 let param = window.location.href.split("?")[1];
 let id = param.split("=")[1];
 
-getActorData(id,false);
-getCommentData(id,false);
-getMovieData(id,true);
-
+window.onload = function() {
+  getActorData(id,false);
+  getCommentData(id,false);
+  getMovieData(id,true);
+  document.getElementById("nav-classes").addEventListener("click", clickFilterByClass);
+}
 
   //通过豆瓣id获得相应电影详情
 function getMovieData(movieId,async) {
@@ -184,3 +186,5 @@ function chooseRandom() {
   let randomNum = Math.floor(Math.random() * idLength);
   window.location.href = "http://127.0.0.1:5501/client/detail-page.html?id=" + movieListId[randomNum];
 }
+
+
