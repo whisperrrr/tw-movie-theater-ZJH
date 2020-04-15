@@ -159,6 +159,7 @@ function filterByClass(classWanted) {
   return movieListSubject;
 }
 
+
 //初始化详情页电影（类似首页）
 // function initialDetailPageMovie(data) {
 //   let popMovieRecommand = document.getElementById("pop-movie-recommand");

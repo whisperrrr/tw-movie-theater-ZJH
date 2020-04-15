@@ -44,6 +44,36 @@ function getMovieList() {
   ajax(options);
 }
 
+//改变主题背景
+function changeLight() {
+  let navBar = document.getElementById("nav-bar");
+  let navSearch = document.getElementById("navsearch");
+  let movieBar = document.getElementById("movie-bar");
+  let logo = document.getElementsByClassName("logo-left")[0];
+  let movieShow = document.getElementsByClassName("movie-show-title");
+  let movieBarLable = document.getElementById("movie-bar-label");
+  let movieIcon = document.getElementsByClassName("icon-dianying");
+  let movieBarColor = movieBar.style.backgroundColor === "rgb(73, 49, 49)"? "transparent":"#493131";
+  let backColorNow = navBar.style.backgroundColor === "rgb(73, 49, 49)"? "#f5f5f5":"#493131";
+  let colorNow = navBar.style.backgroundColor === "rgb(73, 49, 49)"? "#000000":"#e8d195";
+
+  navSearch.style.backgroundColor = backColorNow;
+  navSearch.style.borderBottomColor = colorNow;
+  navBar.style.backgroundColor = backColorNow;
+  navBar.style.color = colorNow;
+  movieBar.style.background = movieBarColor;
+  logo.style.color = colorNow;
+  movieBarLable.style.color = colorNow;
+  movieIcon[0].style.color = colorNow;
+
+  changeMovieShowColor(movieShow,colorNow);
+}
+
+function changeMovieShowColor(movieShow,colorNow) {
+  for (let i = 0; i< movieShow.length; i++) {
+    movieShow[i].style.color = colorNow;
+  }
+}
 
 // //初始化详情页电影（类似首页）
 // function initialDetailPageMovie(data) {

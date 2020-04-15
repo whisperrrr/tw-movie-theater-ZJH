@@ -15,12 +15,6 @@
   src: url(../static/站酷快乐体2016修订版.TTF)
 }
 
-@font-face
-{
-  font-family: gaoduanhei;
-  src: url(../static/\ 站酷高端黑修订151105.TTF)
-}
-
 html,
 body {
   width: 100%;
