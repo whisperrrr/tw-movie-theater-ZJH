@@ -1,9 +1,10 @@
 let MovieList; //前250电影列表，用于制作首页
 let MovieData; //单个电影数据，用于制作详情页
+let CommentData; //单个电影的评论数据
+let ActorData;  //单个电影的演员数据 
 let classMovieList;  //通过类别筛选电影列表
 let movieListId; //所有电影的id编号集合
 let storage = window.localStorage;
-//let BASIC_URL = 'http://127.0.0.1:8888';
 let BASIC_URL = 'http://localhost:8080';
 let apikeys= ['0df993c66c0c636e29ecbb5344252a4a','0b2bdeda43b5688921839c8ecb20399b'];
 
@@ -30,8 +31,7 @@ function displayWindow(win) {
 
 //通过类别筛选电影列表
 function filterByClass(classWanted) {
-  let movieListSubject = MovieList.subjects;
-  movieListSubject = movieListSubject.filter(ele => ele.genres.indexOf(classWanted) > -1);
+  movieListSubject = MovieList.filter(ele => ele.type.indexOf(classWanted) > -1);
   return movieListSubject;
 }
 
@@ -42,7 +42,6 @@ function clickFilterByClass(e) {
     e.target.className = "unactive active";
     initialHomePageMovie(filterByClass(e.target.innerHTML))
     document.getElementById("movie-bar-label").children[0].innerHTML = e.target.innerHTML;
-    displayWindow("home");
     document.documentElement.scrollTop = 0;
   }
 }
@@ -65,6 +64,8 @@ function searchFilterByTitle(e) {
 function movieToDetail(e) {
   let id = e.target.getAttribute("movie-id")
   if (id) {
+    getActorData(id);
+    getCommentData(id);
     getMovieData(id);
     displayWindow("detail");
     document.documentElement.scrollTop = 0;
@@ -76,15 +77,15 @@ function initialHomePageMovie(data) {
   let movieShow = document.getElementById("movie-show");
   if (data.length) {
       movieShow.innerHTML = Array.from(data).reduce((acc, cur) => {
-      return acc += `<a target="_blank" href="./detail-page.html?id=${cur.id}">
-                        <div class="movie-info movie-id=${cur.id}">
-                          <div class="poster"  movie-id=${cur.id} style="background-image:url(${cur.images.small})"></div>
-                          <div class="brief-info">
-                            <p class="movie-show-title" movie-id=${cur.id}>${cur.title}</p>
-                            <p class="summary">${cur.genres.join(' ')}</p>
-                          </div>
-                        </div>
-                      </a> `
+        return acc += `<a target="_blank" href="./detail-page.html?id=${cur.id}">
+                    <div class="movie-info movie-id=${cur.id}">
+                      <div class="poster"  movie-id=${cur.id} style="background-image:url(${cur.smallImg})"></div>
+                      <div class="brief-info">
+                        <p class="movie-show-title" movie-id=${cur.id}>${cur.name}</p>
+                        <p class="summary">${cur.type}</p>
+                      </div>
+                    </div>
+                  </a> `
     }, "")
   } else {
     movieShow.innerHTML = `<strong class="no-result">没有搜索到结果</strong>`
@@ -95,7 +96,6 @@ function initialHomePageMovie(data) {
 function getMovieList() {
   options = {
     url: BASIC_URL + '/movies',
-    //url: BASIC_URL + '/v2/movie/top250',
     method: "GET",
     data: {
     },
@@ -103,8 +103,8 @@ function getMovieList() {
       console.log("get movie list success");
       MovieList = data;
       storage.data = JSON.stringify(data);
-      movieListId = getMovieListId(MovieList.subjects);
-      initialHomePageMovie(MovieList.subjects);
+      movieListId = getMovieListId(data);
+      initialHomePageMovie(data);
     },
     error: function(error) {
       console.log("error",error);
