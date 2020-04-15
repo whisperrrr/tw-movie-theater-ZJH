@@ -59,6 +59,7 @@ input {
   height: auto;
   margin-left: 300px;
   max-width: 1219px;
+  /* background-color: transparent; */
 }
 
 #movie-bar-label {

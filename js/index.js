@@ -20,15 +20,6 @@ window.onload = function () {
   document.getElementsByClassName("icon-search")[0].addEventListener("click", searchFilterByTitle);
 }
 
-//通过名字筛选电影
-function filterByTitle(titleWanted) {
-  let movieListSubject = MovieList;
-  movieListSubject = movieListSubject.filter(
-    ele => ele.name.indexOf(titleWanted) > -1 
-            || makePy(ele.name).join("").indexOf(titleWanted.toUpperCase()) > -1);
-  return movieListSubject;
-}
-
 //获取排名前250的电影信息
 function getMovieList() {
   options = {
